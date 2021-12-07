@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo's Peter</title>
+</head>
+<body>
+    <label for="">Add obj</label>
+    <input type="text" id="name">
+    <input type="button" value="add" onclick="add()">
+    <hr>
+    <label for="">Check obj</label>
+    <input type="text" id="nameadd">
+    <input type="button" value="check" onclick="check()">
+    <hr>
+    <label for="">Del obj</label>
+    <input type="text" id="name">
+    <input type="button" value="delete" onclick="del()">
+    <hr>
+    <input type="button" value="view" onclick="view()">
+    <p id="list">List: </p>
+</body>
+<script>
+    const zoo = new Array();
+    function add () {
+        zoo.push(document.getElementById('nameadd').value);
+    }
+    let listobj = zoo.forEach(element => {
+        listobj + ' '+ element;
+    });
+    function view() {
+        document.getElementById('list').innerHTML = 'List:'+ listobj;
+    }
+</script>
+</html>
