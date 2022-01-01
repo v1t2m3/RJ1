@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gify</title>
+</head>
+<body>
+    <div class="container">
+        <div class="searchgroup">
+              <div class="mb-3">
+                <label class="form-label">Search image</label>
+                <input type="text" id="searchtext" >
+              </div>
+              <button type="submit" onclick="run()">Submit</button>
+        </div>
+        <div id="demo">
+            <img src="">
+        </div>
+    </div>
+
+    
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function run () {
+        let demoimg = document.getElementById('demo');
+        let searchtext = document.getElementById('searchtext').value;
+        console.log(searchtext);
+        let url = 'http://api.giphy.com/v1/gifs/search?q='+searchtext+'&api_key=lwqNJthuWcTCVnUQbl2LYPYmIyQEO0I7';
+        axios.get(url)
+        .then (function(response) {
+            console.log(response.data.data[0].images.original.url);
+            demoimg.innerHTML = '<img src="' + response.data.data[0].images.original.url + '">';
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then (function() {
+            console.log('always:P')
+        });
+    }
+    
+</script>
+</html>
