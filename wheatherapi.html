@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHEATHER</title>
+</head>
+<body>
+    <div class="container">
+        <div class="searchgroup">
+              <div class="mb-3">
+                <label class="form-label">Search City</label>
+                <input type="text" id="searchtext" >
+              </div>
+              <button type="submit" onclick="run()">Submit</button>
+        </div>
+        <div id="demo">
+        </div>
+    </div>
+
+    
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function run () {
+        let demotext = document.getElementById('demo');
+        let searchtext = document.getElementById('searchtext').value;
+        console.log(searchtext);
+        let url = 'https://api.openweathermap.org/data/2.5/weather?q='+searchtext+'&appid=3906a8f907ed11eb2a4f547c4ff10d7f';
+        axios.get(url)
+        .then (function(response) {
+            console.log(response);
+            let temp = (response.data.main.temp - 273).toFixed(1);
+            let humi = response.data.main.humidity;
+            let press = response.data.main.pressure;
+            let visibi = response.data.visibility/1000;
+            demotext.innerHTML = '<p>Nhiệt độ: '+ temp + ' ; Độ ẩm: ' + humi + '% ; Áp suất: ' + press + 'hPa; Tầm nhìn xa: ' + visibi + 'km</p>';
+        })
+        
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then (function() {
+            console.log('always:P')
+        });
+
+    }
+    
+</script>
+</html>
